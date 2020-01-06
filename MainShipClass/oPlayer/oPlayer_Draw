@@ -1,0 +1,7 @@
+event_inherited();
+
+if (mouse_check_button_pressed(mb_right))
+shield(sprite_width, 3, 100);
+
+if (instance_exists(weaponType))
+{ weaponType.wdir = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y); }
