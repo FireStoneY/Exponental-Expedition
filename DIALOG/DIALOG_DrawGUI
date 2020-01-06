@@ -1,0 +1,50 @@
+if (words < array_length_2d(dialog, chapter))
+{ draw_text(10, 10, dialog[chapter, words]); }
+
+draw_set_halign(fa_right);
+draw_set_valign(fa_bottom);
+draw_text(w, h, "Нажмите любую кнопку мыши");
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+
+with (DIALOG) {
+#region TUTORIAL
+
+if (chapter == 0) {
+	
+	switch (words) {
+		
+		case 1:
+			draw_text(w / 2, h / 2, oPlayer.phy_speed_x);
+			
+			if (oPlayer.phy_speed_x >= 3.75)
+			{ words++ }
+			break;
+		
+		case 3:			
+			oPlayer.phy_position_x = 400;
+			oPlayer.phy_position_y = 500;
+			
+			if (instance_number(oEnemyShip) = 0) and (!created)
+			{ create_ship(1300, 500, oEnemyShip, ZeroWeapon, 100, 0, 0, 0.1, 0); created = 1; }
+			
+			if (!instance_exists(oEnemyShip))
+			{ words++; created = 0; }
+			break;
+		
+		case 4:	
+			if (instance_number(oEnemyShip) = 0) and (!created)
+			{ repeat(2) create_ship(1300, 500, oEnemyShip, oRocketWeapon, 100, 10, 1, 0.1, 100); created = 1; }
+			
+			if (!instance_exists(oEnemyShip))
+			{ words++; created = 0; }
+			break;
+			
+		default:
+			if (mouse_check_button_pressed(mb_any))
+			{ words++ }
+			break;
+	}	
+}
+#endregion
+}
