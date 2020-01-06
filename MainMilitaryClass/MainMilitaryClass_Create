@@ -1,0 +1,4 @@
+// standart values of weapons
+spread    = 5.5;
+bullCount = 1;
+bullet    = 0;
