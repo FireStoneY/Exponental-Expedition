@@ -1,0 +1,107 @@
+event_inherited();
+
+if (instance_exists(weaponType)) {
+#region SHOOTING
+
+if (instance_exists(oPlayer)) {
+	
+	// applying direction
+	weaponType.wdir = point_direction(phy_position_x, phy_position_y, oPlayer.phy_position_x, oPlayer.phy_position_y); 
+	
+	if (!alarm[1]) // attack
+	{   
+		alarm[1] = weaponType.reloadTime * room_speed; 
+	}
+}
+
+#endregion
+
+#region CHOOSING TACTICS
+
+
+if (hp > (maxhp * 50 / 100)) and (tactic != "defended") {	
+	if (tactic != "defence") {
+	
+		// ram
+		if (instance_exists(oPlayer)) and (oPlayer.hp < (oPlayer.maxhp * 25 / 100) and (weaponType.fireType == "close")) 
+		{ tactic = "ram"; }
+	
+		if (weaponType.fireType == "close")
+		{ tactic = "convergence"; }
+		else
+		{ tactic = "seclusion"; }
+	}
+}
+
+#endregion
+}
+#region MOVING
+
+if (instance_exists(oPlayer)) {
+	
+	var dir1, dir2, dir4;
+	dir1 = point_direction(phy_position_x, phy_position_y, oPlayer.phy_position_x, oPlayer.phy_position_y);
+	dir2 = point_direction(oPlayer.phy_position_x, oPlayer.phy_position_y, phy_position_x, phy_position_y);
+	
+	if (tactic == "defended") and (instance_exists(dinst)) 
+	{ dir4 = point_direction(dinst.x, dinst.y, oPlayer.x, oPlayer.y); }
+	
+	switch (tactic) {
+			
+		case "seclusion":				
+			if (distance_to_object(oPlayer) < 1000)
+			move(dir2 + (random_range(-10, 10)), "force", spd / 1.5);
+			break;
+		
+		case "convergence":				
+			if (distance_to_object(oPlayer) > 300)
+			{ move(dir1 + (random_range(-10, 10)), "force", spd * 0.7); }
+			else
+			{ move(dir2 + (random_range(-10, 10)), "force", spd * 1.3); }
+		
+		case "ram":				
+			move(dir1, "force", spd * 4);			
+			break;		
+			
+		case "defended":			
+			if (subject[0] == noone) and (subject[1] == noone) and (subject[2] == noone)
+			
+			for (var t = 0; t < 3 * 45; t += 45) 
+			{ subject[t / 45] = create_ship(x + lengthdir_x(100, (dir4 - 45) + t), y + lengthdir_y(100, (dir4 - 45) + t), oEnemyShip, oRocketWeapon, 100, 10, 1, 0.2, 100); subject[t / 45].tactic = "defence";}
+			break;
+	}
+
+	for (var u = 0; u < 3; u++) {
+		if (instance_exists(subject[u])) and (instance_exists(dinst)) {
+			
+			subject[u].phy_position_x = dinst.phy_position_x + lengthdir_x(100, (dir4 - 45) + 45*u);
+			subject[u].phy_position_y = dinst.phy_position_y + lengthdir_y(100, (dir4 - 45) + 45*u);	
+		}
+	}	
+} else {
+	var xrandom, yrandom, dir3, cx, cy;
+
+	cx = camera_get_view_width (view_camera[0])
+	cy = camera_get_view_height(view_camera[0])
+
+	xrandom = random_range(0, cx);
+	yrandom = random_range(0, cy);
+
+	dir3 = point_direction(phy_position_x, phy_position_y, xrandom, yrandom)
+	
+	tactic = "vytocit";
+	
+	move(dir3, "impulse", spd / 2);
+}
+
+#endregion
+
+#region MOVING CONTROL
+
+if (tactic != "ram") {
+	
+	phy_speed_x = clamp(phy_speed_x, -2, 2);
+	phy_speed_y = clamp(phy_speed_y, -2, 2);
+}
+
+#endregion
