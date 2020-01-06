@@ -1,0 +1,10 @@
+var dir = point_direction(phy_position_xprevious, phy_position_yprevious, phy_position_x, phy_position_y);
+
+if (dir >= 90) and (dir <= 270) 
+{ draw_sprite_ext(sprite_index, -1, phy_position_x, phy_position_y, -1, 1, 0, -1, 1); }
+else
+{ draw_sprite_ext(sprite_index, -1, phy_position_x, phy_position_y,  1, 1, 0, -1, 1); }
+
+phy_rotation = 0;
+
+draw_text(x, y + 150, weaponType);
