@@ -1,0 +1,31 @@
+#region ACT
+
+if (target != 0)
+	if (instance_exists(target)) and (!alarm[0])
+	{ alarm[0] = room_speed / 2; }
+
+if (!alarm[1])
+{ alarm[1] = destroy_time; }
+
+#endregion
+
+#region DURABILITY
+
+if (place_meeting(x, y, MainBulletClass)) {
+	
+	var inst = instance_place(x, y, MainBulletClass);
+	
+	durability -= inst.damage;	
+	
+	instance_destroy(inst);
+}
+
+if (durability <= 0) { 
+	instance_destroy(self); 
+	
+	instance_create(x, y, choose(obj_explosion_1, obj_explosion_4)); 
+	
+	instance_create(x, y, choose(obj_smoke_1, obj_smoke_2));
+}
+
+#endregion
