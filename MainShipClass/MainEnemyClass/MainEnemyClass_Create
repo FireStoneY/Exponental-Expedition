@@ -1,0 +1,9 @@
+event_inherited(); // inherit MainShipClass
+subject[0] = noone;
+subject[1] = noone;
+subject[2] = noone;
+
+/* 
+array subject contains id of Enemy Ships
+this array very important in Defensive tactic
+*/
