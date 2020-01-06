@@ -1,0 +1,2 @@
+if (!instance_exists(oEnemyClass)) and (chapterCase != 0)
+{ chapterCase++; activateChapter(); exit; }
