@@ -1,0 +1,2 @@
+instance_destroy(self);
+instance_create_depth(phy_position_x, phy_position_y, 1, irandom_range(obj_explosion_1, obj_explosion_5));
