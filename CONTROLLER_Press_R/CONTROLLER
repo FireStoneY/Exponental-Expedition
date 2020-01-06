@@ -1,0 +1,4 @@
+if (instance_exists(DIALOG)) 
+{ DIALOG.words = 0; }
+
+activateChapter();
