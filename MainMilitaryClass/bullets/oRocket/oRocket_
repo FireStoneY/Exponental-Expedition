@@ -1,0 +1,13 @@
+event_inherited(); // inherit MainBulletClass_Draw
+draw_sprite_ext(sprite_index, -1, phy_position_x, phy_position_y, 1, 1, phy_rotation, -1, 1);
+
+var inst, dir;
+inst = instance_nearest(x, y, target);
+
+if (inst != noone) {
+	
+	dir = point_direction(phy_position_x, phy_position_y, inst.phy_position_x, inst.phy_position_y);
+	
+	if (distance_to_object(inst) < 360) 
+	move(dir, "impulse", 0.1);
+}
