@@ -1,0 +1,15 @@
+if (hp <= 0) {
+	
+	instance_destroy(self);
+
+	var inst = instance_create(phy_position_x, phy_position_y, irandom_range(obj_explosion_1, obj_explosion_5));
+	
+	inst.depth = depth - 1;
+	
+	with (inst) 
+	{ image_xscale = 2; image_yscale = 2; }
+	
+}
+
+if (attacked == true) and (!alarm[3])
+alarm[3] = untract; 
