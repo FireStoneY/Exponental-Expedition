@@ -1,0 +1,53 @@
+event_inherited(); // MainShipClass_Step
+
+#region MOVEMENT
+
+// calculating
+var keyRight, keyLeft, keyUp, keyDown, moveHoriz, moveVert, keyBoost;
+keyRight =  keyboard_check(ord("D"));
+keyLeft  = -keyboard_check(ord("A"));
+keyUp	 = -keyboard_check(ord("W"));
+keyDown  =  keyboard_check(ord("S"));
+keyBoost =  keyboard_check(vk_space) * 45;
+
+moveHoriz = (keyRight + keyLeft) * (spd + keyBoost);
+moveVert  = (keyUp	  + keyDown) * (spd + keyBoost);
+
+// applying
+physics_apply_force(phy_position_x, phy_position_y, moveHoriz, moveVert);
+#endregion
+
+#region SHOOTING
+
+switch (weaponType.fireMode) {
+	case "auto":
+		if (mouse_check_button(mb_left))
+		{ shoot = 1; }
+		break;
+	
+	case "nauto":
+		if (mouse_check_button_pressed(mb_left))
+		{ shoot = 1; }
+		break;
+		
+	default:
+		show_message("wrong mode");
+		break;
+}
+
+if (canShoot) and (shoot) {
+	
+	var dir = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y);
+
+	attack(60, dir, oEnemyClass, weaponType);
+	
+	canShoot = false;
+
+	var rt = weaponType.reloadTime;
+	alarm[0] = rt * room_speed;
+	
+	shoot = 0;	
+}
+
+
+#endregion
