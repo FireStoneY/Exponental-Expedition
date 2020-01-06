@@ -1,0 +1,9 @@
+event_inherited(); // inherit MainShipClass_Create
+
+phy_position_x = room_width  / 2 - (display_get_gui_width() / 4);
+phy_position_y = room_height / 2;
+
+image_blend = c_black;
+
+canShoot = true;
+shoot = 0;
