@@ -1,0 +1,3 @@
+hp -= other.hp / 2;
+
+other.hp -= hp;
