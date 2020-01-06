@@ -1,0 +1,31 @@
+#region CAMERA
+
+view_enabled    = true;
+view_visible[0] = true;
+
+display_set_gui_size(display_get_width(), display_get_height());
+
+view_wport[0] = display_get_width();
+view_hport[0] = display_get_height()
+
+globalvar stw, sth;
+stw = view_wport[0];
+sth = view_hport[0];
+
+window_set_fullscreen(1);
+
+window_set_rectangle((display_get_width() - view_wport[0]) * 0.5, (display_get_height() - view_hport[0]) * 0.5, view_wport[0], view_hport[0]);
+surface_resize(application_surface, 1920, 1080);
+
+globalvar camera;
+camera = camera_create_view(room_width / 2 - display_get_gui_width() / 2, room_height / 2 - display_get_gui_height() / 2, display_get_gui_width(), display_get_gui_height(), 0, 0, 0, 0, 0, 0);
+
+view_set_camera(0, camera);
+
+camera_set_view_size(view_camera[0], view_wport[0], view_hport[0]);
+camera_set_view_pos(camera, 0, 0);
+#endregion
+
+globalvar w, h;
+w = display_get_gui_width();
+h = display_get_gui_height();
