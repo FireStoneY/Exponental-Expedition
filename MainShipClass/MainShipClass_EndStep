@@ -2,7 +2,7 @@
 
 if (instance_exists(weaponType)) {
 	
-	weaponType.depth		  = depth - 1; 
+	weaponType.depth          = depth - 1; 
 	weaponType.phy_position_x = phy_position_x;
 	weaponType.phy_position_y = phy_position_y;
 	weaponType.phy_active     = 0;
