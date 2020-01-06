@@ -1,0 +1,12 @@
+if (instance_exists(target)) {
+	
+	var inst = instance_nearest(phy_position_x, phy_position_y, target);
+	
+	if (distance_to_object(inst) <= raduis) {
+			
+		phy_speed_x = 0;
+		phy_speed_y = 0;
+		var dir = point_direction(phy_position_x, phy_position_y, inst.phy_position_x, inst.phy_position_y);
+		move(dir, "impulse", spd);
+	}
+}
