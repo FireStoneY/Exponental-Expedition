@@ -1,0 +1,4 @@
+globalvar chapterCase; 
+chapterCase = 1; 
+
+activateChapter();
