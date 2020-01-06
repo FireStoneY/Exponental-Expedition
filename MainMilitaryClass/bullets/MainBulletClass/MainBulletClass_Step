@@ -1,0 +1,40 @@
+if (instance_place(phy_position_x, phy_position_y, target)) {
+	
+	#region EFFECT
+	
+	var boominst, inst;
+	boominst = instance_create(phy_position_x, phy_position_y, irandom_range(obj_explosion_1, obj_explosion_5));
+	inst = instance_place(phy_position_x, phy_position_y, target);
+	
+	inst.weaponType.depth = inst.depth + 1;
+	boominst.depth		  = inst.depth - 1;
+
+	#endregion
+
+	#region INVULNERABLE
+	
+	if (inst.attacked == false) {
+		
+		if (inst.curDef > 0) and (inst.curDef > damage) {
+		
+			var damageRatio, newDamage;
+		
+			inst.curDef -= damage;
+
+			damageRatio = inst.curDef * 100 / inst.maxDef;
+			newDamage	= damage - damage * damageRatio / 100;
+		
+			inst.hp -= newDamage; 
+		}
+		else 
+		{ inst.curDef = 0; inst.hp -= damage; }
+	}
+	
+	if (inst.haveUntraction)
+	{ inst.attacked = true; }
+	
+	/* region */
+	if (coll_destoys)
+	{ instance_destroy(self); }	
+	#endregion	
+}
