@@ -1,0 +1,6 @@
+// attack player
+if (instance_exists(oPlayer)) {
+
+	var dir = point_direction(phy_position_x, phy_position_y, oPlayer.x, oPlayer.y);
+	attack(wpos, dir, oPlayer, weaponType);	
+}
