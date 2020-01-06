@@ -1,0 +1,42 @@
+// draw healthbar
+var hpDraw  = (hp	  / maxhp)  * 100;
+var defDraw = (curDef / maxDef) * 100;
+
+draw_text(w / 2, h - 100, hp);
+draw_text(w / 2, h - 175, curDef);
+
+draw_healthbar(50, h - 75,  w - 50, h - 50,  hpDraw,  c_white, c_red,  c_green, 0, true, true);
+draw_healthbar(50, h - 150, w - 50, h - 125, defDraw, c_white, c_gray, c_gray , 0, true, true);
+
+// can shoot
+switch (canShoot) {
+	
+	case true:
+		draw_set_color(c_green);
+		break;
+		
+	case false:
+		draw_set_color(c_red);
+		break;
+}
+
+draw_rectangle(25, display_get_gui_height() - 150, 50, display_get_gui_height() - 125, 0);
+
+draw_set_color(c_white);
+
+// can defend
+switch (canDefend) {
+	
+	case true:
+		draw_set_color(c_green);
+		break;
+		
+	case false:
+		draw_set_color(c_red);
+		break;	
+	
+}
+
+draw_rectangle(75, display_get_gui_height() - 150, 100, display_get_gui_height() - 125, 0);
+
+draw_set_color(c_white);
