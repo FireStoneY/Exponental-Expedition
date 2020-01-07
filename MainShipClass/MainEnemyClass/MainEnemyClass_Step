@@ -6,7 +6,7 @@ if (instance_exists(weaponType)) {
 	// applying direction
 	if (!alarm[1]) // attack
 	{   
-		alarm[1] = weaponType.reloadTime * room_speed; 
+		alarm[1] = weaponType.reloadTime * room_speed + (random_range(-0.3, 0.3)); 
 	}
 
 	#endregion
@@ -21,7 +21,6 @@ if (!instance_exists(myEnemy))
 
 if (myEnemy != noone) {
 #region CHOOSING TACTICS
-
 
 	if (hp > (maxhp * 50 / 100)) and (tactic != "defended") {	
 		if (tactic != "defence") {
@@ -40,7 +39,6 @@ if (myEnemy != noone) {
 	#endregion
 	
 #region MOVING
-
 
 var dir1, dir2, dir4;
 dir1 = point_direction(phy_position_x, phy_position_y, myEnemy.phy_position_x, myEnemy.phy_position_y);
