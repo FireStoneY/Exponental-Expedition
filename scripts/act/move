@@ -1,0 +1,22 @@
+var dir, xdir, ydir, type, spd;
+dir  = argument0;
+type = argument1;
+spd  = argument2;
+
+xdir = lengthdir_x(spd, dir);
+ydir = lengthdir_y(spd, dir);
+
+switch (type) {
+	
+	case "force":
+		physics_apply_force  (phy_position_x, phy_position_y, xdir, ydir);	
+		break;
+		
+	case "impulse":
+		physics_apply_impulse(phy_position_x, phy_position_y, xdir, ydir);
+		break;
+
+	default:
+		show_message("incorrect type of moving");
+		break;	
+}
