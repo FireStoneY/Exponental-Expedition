@@ -1,0 +1,50 @@
+var radius, duration, list, dpower;
+radius   = argument0;
+duration = argument1;
+dpower   = argument2;
+list	 = ds_list_create();
+
+if (!alarm[11])
+{ alarm[11] = duration * room_speed; }
+
+if (instance_exists(MainBulletClass)) and (canDefend) {
+
+	while (duration > 0) {
+	
+		radius   += 1;
+		duration -= 0.1;
+	
+		draw_set_alpha(duration);
+		draw_circle(phy_position_x, phy_position_y, radius, 1);
+	}
+	
+	collision_circle_list(phy_position_x, phy_position_y, radius * 2.5, MainBulletClass, false, true, list, false);
+	
+	var inst, dir;
+	
+	for (var i = 0; i < ds_list_size(list); i++) {
+			
+		inst = ds_list_find_value(list, i);
+		
+		if (inst.shield_destroys) 
+		{ instance_destroy(inst); }
+		else
+		{
+			dir = point_direction(phy_position_x, phy_position_y, inst.phy_position_x, inst.phy_position_y);
+		
+			with (inst) { 
+				
+				if (inst.object_index != oLaser) {
+					
+					move(dir, "impulse", dpower); 
+					inst.phy_fixed_rotation = false;           
+					physics_apply_angular_impulse(random_range(-1, 1));
+				}
+			}		
+		}
+	}
+}
+
+ds_list_destroy(list);
+draw_set_alpha(1);
+canDefend = false;
