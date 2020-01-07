@@ -1,0 +1,11 @@
+switch (chapterCase) {
+	
+	case 1:
+		if (!alarm[0])
+		{ alarm[0] = room_speed * 3; }
+
+		if (val >= 30) 
+		{ draw_text(0, 0, "well done!"); }
+		else
+		{ draw_text(0, 0, "destroy 30 ships \v you destroyed: " + string(val)); }
+}
