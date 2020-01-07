@@ -1,0 +1,26 @@
+var inst, xx, yy, ship, weapon, sHp, sDef, sHaveUntraction, sUntract, sSpd, sGroup;
+xx			    = argument0;
+yy		        = argument1;
+ship		    = argument2;
+weapon		    = argument3;
+sHp			    = argument4;
+sDef		    = argument5;
+sHaveUntraction = argument6;
+sUntract	    = argument7;
+sSpd			= argument8;
+sGroup			= argument9;
+
+inst = instance_create(xx, yy, ship);
+
+inst.weaponType = instance_create(xx, yy, weapon);
+inst.weaponType.owner = inst;
+inst.hp				  = sHp;
+inst.maxhp			  = sHp;
+inst.curDef			  = sDef;
+inst.maxDef		      = sDef;
+inst.haveUntraction   = sHaveUntraction;
+inst.untract		  = sUntract * room_speed;
+inst.spd			  = sSpd;
+inst.group			  = sGroup;
+
+return inst;
