@@ -1,6 +1,16 @@
-// attack player
-if (instance_exists(oPlayer)) {
-
-	var dir = point_direction(phy_position_x, phy_position_y, oPlayer.x, oPlayer.y);
-	attack(wpos, dir, oPlayer, weaponType);	
+// attack enemy
+if (instance_exists(MainShipClass)) {
+	
+	for (var i = 0; i < instance_number(MainShipClass); i++) {
+		
+		var inst = instance_find(MainShipClass, i);
+		
+		if (group != inst.group) {
+			
+			var dir = point_direction(phy_position_x, phy_position_y, inst.x, inst.y);
+			attack(wpos, dir, inst, weaponType);
+			myEnemy = inst;
+			exit;
+		}		
+	}
 }
