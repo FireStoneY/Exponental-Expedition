@@ -1,4 +1,4 @@
-event_inherited(); // MainShipClass_Step
+event_inherited();
 
 #region MOVEMENT
 
@@ -38,16 +38,26 @@ switch (weaponType.fireMode) {
 if (canShoot) and (shoot) {
 	
 	var dir = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y);
-
-	attack(60, dir, oEnemyClass, weaponType);
 	
-	canShoot = false;
+	for (var i = 0; i < instance_number(MainShipClass); i++) {
+		
+		var inst = instance_find(MainShipClass, i);
+		
+		if (group != inst.group) { 
+			
+			attack(60, dir, inst, weaponType); 
+			
+			canShoot = false;
 
-	var rt = weaponType.reloadTime;
-	alarm[0] = rt * room_speed;
+			var rt = weaponType.reloadTime;
+			alarm[0] = rt * room_speed;
 	
-	shoot = 0;	
+			shoot = 0;	
+			
+			exit; 
+		}		
+	}
 }
 
-
 #endregion
+
