@@ -1,0 +1,38 @@
+var wpos, xdir, ydir, inst, ktarget, weapon, list; // ktarget [0] = direction, [1] = object
+
+wpos	   = argument0;
+ktarget[0] = argument1;
+ktarget[1] = argument2;
+weapon	   = argument3;
+xdir = lengthdir_x(wpos, ktarget[0]);
+ydir = lengthdir_y(wpos, ktarget[0]);
+list = ds_list_create();
+
+if (instance_exists(weapon)) 
+{ ds_list_add(list, instance_create(x + xdir, y + ydir, weapon.bullet)); }
+else
+{ ds_list_add(list, instance_create(x + xdir, y + ydir, weapon)); }
+
+inst = ds_list_find_value(list, 0);
+
+repeat(weapon.bullCount - 1) 
+{ ds_list_add(list, instance_create(x + xdir, y + ydir, weapon.bullet)); }
+
+for (var i = 0; i < ds_list_size(list); i++) {
+	
+	var instn = ds_list_find_value(list, i);
+	
+	with (instn) {
+		
+		var rand = random_range(weapon.spread, -weapon.spread);
+		
+		move(ktarget[0] + rand, "impulse", spd);
+		
+		phy_fixed_rotation = true;
+		phy_rotation       = ktarget[0] + rand;
+		direction		   = ktarget[0] + rand;	
+		target			   = ktarget[1];
+	}
+}
+
+ds_list_destroy(list);
