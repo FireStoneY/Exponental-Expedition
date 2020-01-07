@@ -1,4 +1,9 @@
 // standart values of weapons
-spread    = 5.5;
-bullCount = 1;
-bullet    = 0;
+spread     = 5.5;
+bullCount  = 1;
+bullet     = 0;
+fireMode   = "0"; // "nauto" or "auto"
+fireType   = "0"; // "far" or "close"
+reloadTime = room_speed * 0.5; // in seconds
+wdir       = sprite_width + 10; // no self-collision. so to speak
+owner      = noone; // the owner of weapon
