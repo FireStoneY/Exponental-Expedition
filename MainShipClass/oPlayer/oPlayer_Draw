@@ -1,7 +1,20 @@
 event_inherited();
 
-if (mouse_check_button_pressed(mb_right))
-shield(sprite_width, 3, 100);
+switch (shieldType) {
+	
+	case "shield":
+		if (mouse_check_button_pressed(mb_right))
+		shield(sprite_width, 3, curShieldDuration, 100, "shield");
+		break;
+	
+	case "pulsar":
+		if (mouse_check_button(mb_right))
+		{ curShieldDuration = shield(sprite_width, 3, curShieldDuration, 100, "pulsar"); }
+		
+		if (mouse_check_button_released(mb_right))
+		{ instance_destroy(pulsar); pulsarCrated = 0; }
+		break;
+}
 
 if (instance_exists(weaponType))
 { weaponType.wdir = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y); }
