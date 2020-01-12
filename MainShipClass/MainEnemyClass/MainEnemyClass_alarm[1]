@@ -1,16 +1,26 @@
-// attack enemy
+/// @description attack
+var curVAL, minVAL, inst, minst;
+curVAL = 0;
+minVAL = visRadius
+inst  = noone;
+minst = noone;
+
 if (instance_exists(MainShipClass)) {
-	
+		
 	for (var i = 0; i < instance_number(MainShipClass); i++) {
+
+		inst = instance_find(MainShipClass, i);
 		
-		var inst = instance_find(MainShipClass, i);
+		curVAL = distance_to_object(inst);;
 		
-		if (group != inst.group) {
-			
-			var dir = point_direction(phy_position_x, phy_position_y, inst.x, inst.y);
-			attack(wpos, dir, inst, weaponType);
-			myEnemy = inst;
-			exit;
-		}		
+		if (minVAL > curVAL) and (inst.group != group) and (inst.object_index != MODULE)
+		{ minVAL = curVAL; minst = inst; }
+	}
+	
+	if (instance_exists(minst)) {
+	
+		var dir = point_direction(phy_position_x, phy_position_y, minst.phy_position_x, minst.phy_position_y);
+		attack(60, dir, minst, weaponType);
+		myEnemy = minst;
 	}
 }
