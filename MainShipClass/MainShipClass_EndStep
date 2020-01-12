@@ -9,6 +9,7 @@ if (instance_exists(weaponType)) {
 }
 #endregion
 
+#region PULSAR STAB
 if (instance_exists(pulsar)) {
 	
 	pulsar.phy_position_x = phy_position_x;
