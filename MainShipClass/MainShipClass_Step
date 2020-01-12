@@ -1,3 +1,5 @@
+#region DEATH
+
 if (hp <= 0) {
 	
 	instance_destroy(self);
@@ -9,10 +11,46 @@ if (hp <= 0) {
 	with (inst) 
 	{ image_xscale = 2; image_yscale = 2; }
 	
+	switch (chapterCase) {
+		
+		case 1:
+			if (object_index == oEnemyShip)
+			{ CONTROLLER.val++ }
+			break;
+			
+		case 2:
+			if (object_index == MODULE) {
+				
+				CONTROLLER.val++ 
+			
+				with (inst)
+				{ image_xscale = 6; image_yscale = 6; image_speed = 0.5 }
+			}
+			
+				break;
+	}		
 }
 
-if (phy_position_x < room_width)  or (phy_position_x > room_width) or (phy_position_y < room_height) or (phy_position_y > room_height) 
-{ instance_destroy(self); }
+
+#endregion
+
+#region UNTRUCTION
 
 if (attacked == true) and (!alarm[3])
 alarm[3] = untract; 
+
+#endregion
+
+#region RECOVER SHIELD PULSAR
+
+if (curShieldDuration <= 0) and (!alarm[10])
+{ alarm[10] = recoverShield; }
+
+#endregion
+
+#region CAN DEFEND
+
+if (!alarm[11]) and (!canDefend)
+{ alarm[11] = 1.5 * room_speed; }
+
+#endregion
