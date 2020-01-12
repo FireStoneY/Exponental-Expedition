@@ -1,0 +1,30 @@
+switch (chapterCase) {
+	
+	case 1:
+		if (!alarm[0])
+		{ alarm[0] = room_speed * 4; }
+				
+		if (val >= 30) 
+		{ draw_text(0, 0, "well done!"); chapterCase++; val = 0; activateChapter(); }
+		else
+		{ draw_text(0, 0, "destroy 30 ships \v you destroyed: " + string(val)); }
+		break;
+	
+	case 2:
+		
+		draw_text(0, 0, "destroy 3 modules");
+		
+		if (!alarm[0])
+		{ alarm[0] = room_speed * 5; }
+		
+		var i = 0;
+		
+		if (!instance_exists(MODULE)) and (instance_number(MODULE) < 3)
+		{ repeat(3) { instance_create(300 + 1500 * i, 700, MODULE); i++ } }
+		
+		if (val >= 3) 
+		{ draw_text(0, 0, "well done!"); chapterCase++; val = 0; activateChapter(); }
+		else
+		{ draw_text(0, 0, "destroy 3 modules \v you destroyed: " + string(val)); }		
+		break;
+}
