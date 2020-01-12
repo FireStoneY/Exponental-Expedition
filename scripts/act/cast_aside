@@ -1,0 +1,20 @@
+var object, list, num, radius, dpower;
+object = argument0;
+radius = argument1;
+dpower = argument2;
+list = ds_list_create(); 
+num  = collision_circle_list(x, y, radius, object, 0, 1, list, 0);
+
+if (num > 0)
+	for (var i = 0; i < num; i++) {
+		
+		var dir, inst;
+		
+		inst = ds_list_find_value(list, i);
+		dir  = point_direction(x, y, inst.x, inst.y);
+		
+		with (inst) 
+		{ move(dir, "impulse", dpower); }
+	}
+
+ds_list_destroy(list);
