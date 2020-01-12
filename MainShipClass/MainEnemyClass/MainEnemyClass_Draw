@@ -8,18 +8,12 @@ var hpDraw  = (hp / maxhp)  * 100;
 draw_healthbar(phy_position_x - 50, phy_position_y + 20, phy_position_x + 50, phy_position_y + 10, hpDraw, c_white, c_red, c_green, 0, true, true);
 draw_set_alpha(1);
 
-draw_text(x + 100, y + 125, hp)
-
 if (instance_exists(MainBulletClass)) {
 	
 	var inst = instance_nearest(phy_position_x, phy_position_y, MainBulletClass);
 	
-	if (distance_to_object(inst) < 50) and (inst.target != oPlayer)
-	{ shield(20, 6, 100); }
+	if (instance_exists(myEnemy)) and (instance_exists(inst.target))
+		if (distance_to_object(inst) < 50) and (inst.target.object_index != myEnemy.object_index)
+		{ curShieldDuration = shield(128, 6, curShieldDuration, 100, "pulsar"); } 
 }
-
-draw_text(x + 100, y + 150, tactic);
-
-if (tactic == "defended")
-{ draw_text(x + 100, y + 200, dinst); }
 
