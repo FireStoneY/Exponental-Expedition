@@ -1,0 +1,15 @@
+if (instance_exists(pulsar)) {
+	with (pulsar) {
+		
+		image_xscale = 4;
+		image_yscale = 4;	
+		
+		if (fixture == 0) {
+			
+			fixture = physics_fixture_create();
+			
+			physics_fixture_set_circle_shape(fixture, sprite_get_width(sprite_index) * 2);
+			physics_fixture_bind(fixture, self);
+		}
+	}	
+
